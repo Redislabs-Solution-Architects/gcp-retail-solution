@@ -1,1 +1,1 @@
-# gcp-retail-solution
+# GCP Retail Solution
