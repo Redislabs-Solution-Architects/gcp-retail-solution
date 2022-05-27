@@ -9,6 +9,7 @@ Prior to running this retail application, please ensure following pre-requisites
 
 - [gcloud CLI](https://cloud.google.com/sdk/docs/install)
 - [yq - YAML/XML processor](https://pypi.org/project/yq/)
+<br><br>
 
 
 ## High Level Workflow
