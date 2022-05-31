@@ -37,7 +37,7 @@ cd gcp-retail-solution
 
 #### 2. Set up a Redis Enterprise Active-Active subscription on Google Cloud Platform
 Create an active-active subscription in GCP:
-(./img/gcp_aa_sub_config.png = 400x250)  
+![Active-Active Subscription](./img/gcp_aa_sub_config.png = 400x250)  
   
 Configure the two Conflict-Free Replicated Database (CRBD) instances:
 (./img/gcp_db_config.png)
