@@ -37,23 +37,23 @@ cd gcp-retail-solution
 
 #### 2. Set up a Redis Enterprise Active-Active subscription on Google Cloud Platform
 Create an active-active subscription in GCP:  
-![Active-Active Subscription](./img/gcp_aa_sub_config.png)  
+![Active-Active Subscription configure](./img/gcp_aa_sub_config.png)  
   
 Configure the two Conflict-Free Replicated Database (CRBD) instances:
-(./img/gcp_db_config.png)
+![CRDB configure](./img/gcp_db_config.png)
  
 The database configuration confirmation page should look like the following:
-(./img/gcp_db_config_confirm.png)
+![CRDB confirm](./img/gcp_db_config_confirm.png)
 
 The subscription confirmation page should look like the following:
-(./img/gcp_aa_sub_confirm.png)
+![Active-Active Subscription confirm](./img/gcp_aa_sub_confirm.png)
   
 It will take about 5 - 10 minutes to provision the subscription.   
 Upon completion, you will go into each database's details to collect their private endpoint and default user's password:
-(./img/gcp_aa_us-east1-db.png)    
-(./img/gcp_aa_us-east1-db-security.png)     
-(./img/gcp_aa_us-west1-db.png)   
-(./img/gcp_aa_us-west1-db-security.png)   
+![A-A us-east1 region DB](./img/gcp_aa_us-east1-db.png)    
+![A-A us-east1 region DB pwd](./img/gcp_aa_us-east1-db-security.png)     
+![A-A us-west1 region DB](./img/gcp_aa_us-west1-db.png)   
+![A-A us-west1 region DB pwd](./img/gcp_aa_us-west1-db-security.png)   
   
 
 
