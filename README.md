@@ -50,8 +50,8 @@ The subscription confirmation page should look like the following:
   
 It will take about 5 - 10 minutes to provision the subscription.   
 Upon completion, you will go into each database's details to collect their private endpoint and default user's password:
-(./img/gcp_aa_us-east1-db.png = 400x250)    
-(./img/gcp_aa_us-east1-db-security.png = 400x250)     
+(./img/gcp_aa_us-east1-db.png)    
+(./img/gcp_aa_us-east1-db-security.png)     
 (./img/gcp_aa_us-west1-db.png)   
 (./img/gcp_aa_us-west1-db-security.png)   
   
