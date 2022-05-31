@@ -12,22 +12,22 @@ gcloud compute networks create $vpc_network \
 
 gcloud compute networks subnets create $vpc_subnet_east \
 	--network=$vpc_network \
-	--range=10.70.0.0/24 \
+	--range=10.50.0.0/24 \
 	--region=us-east1
 
 gcloud compute networks subnets create $vpc_subnet_west \
         --network=$vpc_network \
-        --range=10.80.0.0/24 \
+        --range=10.60.0.0/24 \
         --region=us-west1
 
 gcloud compute networks vpc-access connectors create $vpc_connector_east \
 	--region us-east1 \
 	--network $vpc_network \
-	--range 10.72.0.0/28
+	--range 10.52.0.0/28
 
 gcloud compute networks vpc-access connectors create $vpc_connector_west \
         --region us-west1 \
         --network $vpc_network \
-        --range 10.82.0.0/28
+        --range 10.62.0.0/28
 
 
