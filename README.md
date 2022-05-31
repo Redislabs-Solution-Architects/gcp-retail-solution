@@ -84,11 +84,19 @@ popd
 
 
 #### 5. Peer Redis's VPC in each region to your VPC network
-```
+Inside Redis Console, find your subscription created earlier and select the "Connectivity" tab:  
+![VPC Peering](./img/gcp_aa_vpc_peerings.png)  
+  
+Select us-east1 region and create a VPC peering:  
+![VPC Peering us-east1](./img/gcp_aa_vpc_peering_us-east1.png)  
+  
+Once it is successfully peered, the peering status will turn GREEN:  
+![VPC Peering us-east1 success](/img/gcp_aa_vpc_peering_us-east1-success.png)  
+  
+Continue to peer the us-west1 region as follows:  
+![VPC Peering us-west1](./img/gcp_aa_vpc_peering_us-west1.png)    
+![VPC Peering us-west1 success](/img/gcp_aa_vpc_peering_us-west1-success.png)  
 
-Work In Progress
-
-```
 
 
 #### 6. Create a CloudSQL (MySQL) Master/Replica pair instances for storing the product catalog
