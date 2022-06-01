@@ -241,6 +241,7 @@ popd
 
 
 #### 10. Access the retail application via the load balancer's endpoint
+It will take about 5 minutes or so before the load balancer can serve the application.  
 Run the following command to retrieve the IP address of the endpoint:
 ```
 gcloud compute addresses describe $lb_ipv4 \
