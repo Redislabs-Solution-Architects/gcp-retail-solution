@@ -265,6 +265,9 @@ After putting items into the shopping cart, it will look like the following:
 pushd gcloud
 ./tear_down.sh
 popd
-```
+```   
+   
+Finally, delete your Redis Enterprise Active-Active subscription.
+   
 
 
