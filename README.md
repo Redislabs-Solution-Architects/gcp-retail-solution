@@ -259,8 +259,14 @@ Then, access the retail application via the endpoint: http://<endpoint-ip-addres
 ```
 pushd gcloud
 
-Work In Progress
+./tear_down.sh
 
 popd
 ```
+Finally, remove the VPC network. The following command does not work and the issue has been reported here - https://issuetracker.google.com/issues/186792016?pli=1
+```
+gcloud compute networks delete $vpc_network --quiet
+```
+For the time being, you are required to delete the VPC network in GCP console.
+
 
