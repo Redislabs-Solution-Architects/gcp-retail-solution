@@ -71,6 +71,7 @@ popd
 #### 4. Create a VPC network, VPC subnets, VPC connectors for private service access, and CloudSQL private service access
 ```
 pushd gcloud
+
 export vpc_network=redis-retail-vpc
 export vpc_subnet_east=redis-retail-vpc-us-east1
 export vpc_connector_east=redis-retail-us-east1
@@ -105,6 +106,7 @@ Continue to peer the us-west1 region as follows:
 #### 6. Create a CloudSQL (MySQL) Master/Replica pair instances for storing the product catalog
 ```
 pushd gcloud
+
 export cloudsql_master=redis-retail-product-master
 export cloudsql_replica=redis-retail-product-replica
 
@@ -171,9 +173,6 @@ popd
 #### 9. Create a load balancer for the retail application serving in two GCP regions
 Create network endpoint groups:
 ```
-pushd gcloud
-```
-```
 export neg_east=glau-retail-neg-east
 export neg_west=glau-retail-neg-west
 
@@ -237,9 +236,6 @@ gcloud compute forwarding-rules create $http_content_rule \
         --global \
         --target-http-proxy=$http_lb_proxy \
         --ports=80
-```
-```
-popd
 ```
 
 
