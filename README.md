@@ -252,7 +252,11 @@ gcloud compute addresses describe $lb_ipv4 \
 	--format="get(address)" \
 	--global
 ```
-Then, access the retail application via the endpoint: http://\<endpoint-ip-address\> .
+Then, access the retail application via the endpoint: http://\<endpoint-ip-address\> .  
+This is the home page of the Retail App:  
+![Retail App - Home-1](./img/redis-retail-app-1.png)  
+After putting items into the shopping cart, it will look like the following:   
+![Retail App - Home-2](./img/redis-retail-app-2.png)
 
 
 
