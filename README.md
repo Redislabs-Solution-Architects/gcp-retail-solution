@@ -77,7 +77,10 @@ export vpc_connector_east=redis-retail-us-east1
 export vpc_subnet_west=redis-retail-vpc-us-west1
 export vpc_connector_west=redis-retail-us-west1
 
-./create_vpc.sh $vpc_network $vpc_subnet_east $vpc_connector_east $vpc_subnet_west $vpc_connector_west $PROJECT_ID
+./create_vpc.sh $vpc_network \
+	$vpc_subnet_east $vpc_connector_east \
+	$vpc_subnet_west $vpc_connector_west \
+	$PROJECT_ID
 
 popd
 ```
