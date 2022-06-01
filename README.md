@@ -259,11 +259,5 @@ pushd gcloud
 
 popd
 ```
-Finally, remove the VPC network. The following command does not work and the issue has been reported here - https://issuetracker.google.com/issues/186792016?pli=1
-```
-gcloud compute networks delete $vpc_network --quiet
-```
-Meanwhile, you are required to delete the VPC network in GCP console.  
-![Remove VPC in GCP console](./img/gcp_vpc_delete_gui.png)
 
 

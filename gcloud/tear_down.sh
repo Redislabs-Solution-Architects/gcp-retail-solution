@@ -43,8 +43,7 @@ gcloud sql instances delete $cloudsql_master --quiet
 
 # Remove VPC Peering for private service access to Cloud SQL and the associated allocated IP range
 gcloud services vpc-peerings delete --network=$vpc_network \
-        --service=servicenetworking.googleapis.com \
-        --async
+        --service=servicenetworking.googleapis.com
 gcloud compute addresses delete google-managed-services-$vpc_network \
         --global \
         --quiet
@@ -65,18 +64,19 @@ gcloud compute networks subnets delete $vpc_subnet_west \
 
 
 # Remove VPC Peering connections
-vpc_peerings=`gcloud compute networks peerings list --network=$vpc_network | awk 'NR>1 {print $1}'`
+vpc_peerings=(`gcloud compute networks peerings list --network=$vpc_network | awk 'NR>1 {print $1}'`)
 for item in $vpc_peerings
 do
-        echo $item
-        gcloud compute networks peerings delete $item --network=$1
+        gcloud compute networks peerings delete $item --network=$vpc_network
 done
 
-routes=`gcloud compute routes list --filter="'$vpc_network'" | awk 'NR>1 {print $1}'`
-for item in $routes
-do
-        echo $item
-        gcloud compute routes delete $item --quiet
-done
+#routes=(`gcloud compute routes list --filter="'$vpc_network'" | awk 'NR>1 {print $1}'`)
+#for item in $routes
+#do
+#        gcloud compute routes delete $item --quiet
+#done
+
+# Remove VPC network
+gcloud compute networks delete $vpc_network --quiet
 
 
