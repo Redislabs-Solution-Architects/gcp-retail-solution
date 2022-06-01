@@ -2,6 +2,7 @@
 
 cloudsql_master=$1
 cloudsql_replica=$2
+vpc_network=$3
 
 gcloud sql instances create $cloudsql_master \
 	--cpu=2 --memory=4GB \
@@ -13,7 +14,8 @@ gcloud sql instances create $cloudsql_master \
 	--root-password=redis \
 	--storage-size=10 \
 	--storage-type=SSD \
-	--region=us-east1
+	--region=us-east1 \
+	--network=$vpc_network
 
 gcloud sql instances create $cloudsql_replica \
         --master-instance-name=$cloudsql_master \

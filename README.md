@@ -68,7 +68,7 @@ popd
 ```
 
 
-#### 4. Create a VPC network, VPC subnets and VPC connectors for private service access
+#### 4. Create a VPC network, VPC subnets, VPC connectors for private service access, and CloudSQL private service access
 ```
 pushd gcloud
 export vpc_network=redis-retail-vpc
@@ -77,7 +77,7 @@ export vpc_connector_east=redis-retail-us-east1
 export vpc_subnet_west=redis-retail-vpc-us-west1
 export vpc_connector_west=redis-retail-us-west1
 
-./create_vpc.sh $vpc_network $vpc_subnet_east $vpc_connector_east $vpc_subnet_west $vpc_connector_west
+./create_vpc.sh $vpc_network $vpc_subnet_east $vpc_connector_east $vpc_subnet_west $vpc_connector_west $PROJECT_ID
 
 popd
 ```
@@ -105,11 +105,21 @@ pushd gcloud
 export cloudsql_master=redis-retail-product-master
 export cloudsql_replica=redis-retail-product-replica
 
-./create_cloudsql.sh $cloudsql_master $cloudsql_replica
+./create_cloudsql.sh $cloudsql_master $cloudsql_replica $vpc_network
 
 popd
 ```
-
+Next, collect the private IP address for the MySQL Master and Replica instances:  
+Run the command below to collect the Master instance's private IP for Cloud Run service in us-east1 region for use later by env_vars_us_east1.yaml:    
+```
+gcloud sql instances describe $cloudsql_master | yq eval '.ipAddresses[] | select(.type == "PRIVATE") | .ipAddress'
+```
+  
+Run the command below to collect the Replica instance's private IP for Cloud Run service in us-west1 region for use later by env_vars_us_west1.yaml:
+```
+gcloud sql instances describe $cloudsql_replica | yq eval '.ipAddresses[] | select(.type == "PRIVATE") | .ipAddress'
+```
+  
 
 #### 7. Populate product data into the MySQL database (named acme)
 ```
@@ -147,8 +157,8 @@ export cloudrun_east=redis-retail-svc-east1
 export cloudrun_west=redis-retail-svc-west1
 
 ./create_cloudrun.sh $app_image \
-        $cloudrun_east1 $vpc_connector_east $cloudsql_master \
-        $cloudrun_west1 $vpc_connector_west $cloudsql_replica
+        $cloudrun_east $vpc_connector_east $cloudsql_master \
+        $cloudrun_west $vpc_connector_west $cloudsql_replica
 ```
 ```
 popd
