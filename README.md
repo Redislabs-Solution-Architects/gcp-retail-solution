@@ -114,16 +114,20 @@ export cloudsql_replica=redis-retail-product-replica
 
 popd
 ```
-Next, collect the private IP address for the MySQL Master and Replica instances:  
-Run the command below to collect the Master instance's private IP for Cloud Run service in us-east1 region for use later by env_vars_us_east1.yaml:    
+It will take about 10 or minutes to provision both Master and Replica MySQL instances.  
+Next, collect the private IP address for the MySQL Master and Replica instances:   
+Run the command below to collect the Master instance's private IP address endpoint for Cloud Run service in us-east1 region for use later by env_vars_us_east1.yaml:    
 ```
 gcloud sql instances describe $cloudsql_master | yq eval '.ipAddresses[] | select(.type == "PRIVATE") | .ipAddress'
 ```
   
-Run the command below to collect the Replica instance's private IP for Cloud Run service in us-west1 region for use later by env_vars_us_west1.yaml:
+Run the command below to collect the Replica instance's private IP address endpoint for Cloud Run service in us-west1 region for use later by env_vars_us_west1.yaml:
 ```
 gcloud sql instances describe $cloudsql_replica | yq eval '.ipAddresses[] | select(.type == "PRIVATE") | .ipAddress'
-```
+```   
+Or, you can look up the private IP addresses in GCP console like below:
+![GCP console - MySQL private IP addresses](./img//gcp_console_cloudsql_mysql_ip_address.png)
+
   
 
 #### 7. Populate product data into the MySQL database (named acme)
@@ -254,9 +258,7 @@ Then, access the retail application via the endpoint: http://<endpoint-ip-addres
 #### 11. Tear down the environment
 ```
 pushd gcloud
-
 ./tear_down.sh
-
 popd
 ```
 
