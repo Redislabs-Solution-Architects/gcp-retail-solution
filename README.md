@@ -263,6 +263,7 @@ Finally, remove the VPC network. The following command does not work and the iss
 ```
 gcloud compute networks delete $vpc_network --quiet
 ```
-For the time being, you are required to delete the VPC network in GCP console.
+Meanwhile, you are required to delete the VPC network in GCP console.  
+![Remove VPC in GCP console](./img/gcp_vpc_delete_gui.png)
 
 
