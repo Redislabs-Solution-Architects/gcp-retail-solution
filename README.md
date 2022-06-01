@@ -126,7 +126,8 @@ Run the command below to collect the Replica instance's private IP address endpo
 gcloud sql instances describe $cloudsql_replica | yq eval '.ipAddresses[] | select(.type == "PRIVATE") | .ipAddress'
 ```   
 Or, you can look up the private IP addresses in GCP console like below:
-![GCP console - MySQL private IP addresses](./img//gcp_console_cloudsql_mysql_ip_address.png)
+![GCP console - MySQL private IP addresses](./img//gcp_console_cloudsql_mysql_ip_address.png)   
+You would likely to have different private IP addresses for your MySQL Master and Replica instances.   
 
   
 
@@ -251,7 +252,7 @@ gcloud compute addresses describe $lb_ipv4 \
 	--format="get(address)" \
 	--global
 ```
-Then, access the retail application via the endpoint: http://<endpoint-ip-address> .
+Then, access the retail application via the endpoint: http://\<endpoint-ip-address\> .
 
 
 
