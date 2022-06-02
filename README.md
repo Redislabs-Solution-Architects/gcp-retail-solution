@@ -36,7 +36,8 @@ cd gcp-retail-solution
 
 
 #### 2. Set up a Redis Enterprise Active-Active subscription on Google Cloud Platform
-Create an active-active subscription in GCP:  
+Create an active-active subscription in GCP:   
+For this setup, you will pick **us-east1** and **us-west1** GCP regions as follows:  
 ![Active-Active Subscription configure](./img/gcp_aa_sub_config.png)  
   
 Configure the two Conflict-Free Replicated Database (CRBD) instances:
@@ -114,7 +115,7 @@ export cloudsql_replica=redis-retail-product-replica
 
 popd
 ```
-It will take about 10 or minutes to provision both Master and Replica MySQL instances.  
+It will take about 10 minutes or so to provision both Master and Replica MySQL instances.  
 Next, collect the private IP address for the MySQL Master and Replica instances:   
 Run the command below to collect the Master instance's private IP address endpoint for Cloud Run service in us-east1 region for use later by env_vars_us_east1.yaml:    
 ```
@@ -127,7 +128,7 @@ gcloud sql instances describe $cloudsql_replica | yq eval '.ipAddresses[] | sele
 ```   
 Or, you can look up the private IP addresses in GCP console like below:
 ![GCP console - MySQL private IP addresses](./img//gcp_console_cloudsql_mysql_ip_address.png)   
-You would likely to have different private IP addresses for your MySQL Master and Replica instances.   
+You would likely have different private IP addresses for your MySQL Master and Replica instances.   
 
   
 
