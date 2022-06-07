@@ -3,7 +3,13 @@
 This repo contains utility code for the [Redis Enterprise Session Stability Store Solution Brief.](https://www.google.com) <br>
 They are for demonstration purposes and not meant for production.  <br><br>
 
+![Retail solution - Redis on GCP](./img/Retail_Architecture_on_GCP.png)  
+  
+The above architecture depicts a microservice architecture for a retail / e-commerce application on Google Cloud Platform. The incoming eCommerce traffic comes through Google Cloud Load Balancer along with Cloud Armor to safeguard against DDoS and application attacks from intruders and with Cloud CDN to accelerate content delivery to end users while reducing serving costs.   
+The incoming requests get processed by the microservices hosted on containers in Google Cloud Run scalable serverless environments. Individual microservices can scale in or out based on real-time workload requirements without overprovisioning unused resources. The product catalog, inventory system, customer profile, etc are stored in fully managed database services such as CloudSQL and third-party Redis Enterprise fully managed services to provide a persistent store and a real-time session store respectively.   
+The backoffice custom or packaged applications such as order fulfillment and management systems are hosted on various Google computing environments such as Google Compute Engine and Google App Engine. Google Cloud Looker is an important strategic component in Google Cloud Platform visualization suite to help retailers improve productivity, increase decision-making capabilities, and promote innovations by delivering more insights.
 
+   
 ## Pre-requisites
 Prior to running this retail application, please ensure following pre-requisites are installed and configured.
 
