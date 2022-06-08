@@ -76,7 +76,8 @@ popd
 ```
 
 
-#### 4. Create a VPC network, VPC subnets, VPC connectors for private service access, and CloudSQL private service access
+#### 4. Create a VPC network, VPC subnets, VPC connectors for private service access, and CloudSQL private service access  
+*Note: The create_vpc.sh script will create a subnet in us-east1 region using 10.50.0.0/24 and a subnet in us-west1 region using 10.60.0.0/24 address spaces. If they conflict with the CIDRs in your Redis Enterprise Active-Active deployment above or any of your existing subnets in your VPC to be peered with your Redis Enterprise subscription, please update the script accordingly before running the commands below:*  
 ```
 pushd gcloud
 
