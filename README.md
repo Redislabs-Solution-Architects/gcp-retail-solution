@@ -43,7 +43,8 @@ cd gcp-retail-solution
 
 #### 2. Set up a Redis Enterprise Active-Active subscription on Google Cloud Platform
 Create an active-active subscription in GCP:   
-For this setup, you will pick **us-east1** and **us-west1** GCP regions as follows:  
+For this setup, you will pick **us-east1** and **us-west1** GCP regions as follows:    
+In this example, we use 10.70.0.0 and 10.80.0.0 for the two GCP regions. If either of them overlaps with any of your existing subnets in VPC which will be peered with the subscription, please choose a different set of CIDRs for your deployment.   
 ![Active-Active Subscription configure](./img/gcp_aa_sub_config.png)  
   
 Configure the two Conflict-Free Replicated Database (CRBD) instances:
