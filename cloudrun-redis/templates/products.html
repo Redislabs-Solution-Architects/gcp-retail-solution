@@ -1,108 +1,272 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Python Flask Simple Shopping Cart</title>
-	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-	<style>
-	table, th, td, tr {
-	  border: 1px solid grey;
-	  border-collapse: collapse;
-	}
-	th, td {
-	  padding: 15px;
-	}
-	h1 {
-	  font-size: 2.5em; /* 40px/16=2.5em */
-	}
-	h2 {
-	  font-size: 1.875em; /* 30px/16=1.875em */
-	 }
-	</style>
-</head>
-<body>
-	<div>
-		{% with messages = get_flashed_messages() %}
-		  {% if messages %}
-			<ul class=flashes>
-			{% for message in messages %}
-			  <li>{{ message }}</li>
-			{% endfor %}
-			</ul>
-		  {% endif %}
-		{% endwith %}
-	</div>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Album example · Bootstrap v5.2</title>
 
-<h1>[GCP Region: {{ gcp_region }}]</h1>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+        />
 
-	<div id="shopping-cart">
-		<div class="txt-heading"><h2>Shopping Cart</h2></div>		
-		{% if 'cart_item' in session %}
-			<table class="tbl-cart" cellpadding="10" cellspacing="1">
-			<tbody>
-				<tr>
-					<th style="text-align:left;">Item</th>
-					<th style="text-align:left;">Name</th>
-					<th style="text-align:left;" width="10%">Code</th>
-					<th style="text-align:right;" width="5%">Quantity</th>
-					<th style="text-align:right;" width="10%">Unit Price</th>
-					<th style="text-align:right;" width="10%">Price</th>
-					<th style="text-align:center;" width="10%">Remove</th>
-				</tr>
-				{% for key, val in session['cart_item'].items() %}
-					{% set quantity = session['cart_item'][key]['quantity'] %}
-					{% set price = session['cart_item'][key]['price'] %}
-					{% set item_price = session['cart_item'][key]['total_price'] %}					
-					<tr>
-						<td align="center"><img src="/static/images/{{ session['cart_item'][key]['image'] }}" class="cart-item-image" /  width="100" height="100"></td>
-						<td style="text-align:middle;">{{ session['cart_item'][key]['name'] }}</td>
-						<td>{{ session['cart_item'][key]['code'] }}</td>
-						<td style="text-align:right;">{{ quantity }}</td>
-						<td  style="text-align:right;">{{ price | currencyFormat }}</td>
-						<td  style="text-align:right;">{{ item_price | currencyFormat }}</td>
-						<td style="text-align:center;">
-							<a href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}" class="btnRemoveAction">
-								<img src="/static/images/icon-delete.jpg" alt="Remove Item" / width="100" height="25">
-							</a>
-						</td>
-					</tr>
-				{% endfor %}
-				<tr>
-					<td></td>
-					<td colspan="2" align="right">Total:</td>
-					<td align="right">{{ session['sub_total_quantity'] }}</td>
-					<td align="right" colspan="2"><strong>{{ session['sub_total_price'] | currencyFormat }}</strong></td>
-					<td align="center"><a id="btnEmpty" href="{{ url_for('.empty_cart') }}">Empty Cart</a></td>
-				</tr>
-			</tbody>
-			</table>
-		{% else: %}
-			<div class="no-records">Your Cart is Empty</div>
-		{% endif %}
-	</div>
-<br>
-	<div id="product-grid">
-	<div class="txt-heading"><h2>Product Catalog</h2></div>
-		<table class="product_table" style="width:100%">
-		{% for product_row in products | batch(4, '&nbsp;') %}
-		<tr>
-			{% for product in product_row %}
-			<td class="c1" align="center">
-			<form method="post" action="/add">
-				<div><img src="/static/images/{{ product.image }}"  width="100" height="100"></div>
-				<div>{{ product.name }}</div>
-				<div>{{ product.price | currencyFormat }}</div>
-				<div class="cart-action">
-					<input type="hidden" name="code" value="{{ product.code }}"/>
-					<input type="text" class="product-quantity" name="quantity" value="1" size="2" />
-					<input type="submit" value="Add to Cart" class="btnAddAction" />
-				</div>
-			</form>
-			</td>
-			{% endfor %}
-		</tr>
-		{% endfor %}
-		</table>
-	</div>
+        <style>
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
 
-</body>
+            /* Firefox */
+            input[type='number'] {
+                -moz-appearance: textfield;
+            }
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+
+            .b-example-divider {
+                height: 3rem;
+                background-color: rgba(0, 0, 0, 0.1);
+                border: solid rgba(0, 0, 0, 0.15);
+                border-width: 1px 0;
+                box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+                    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+            }
+
+            .b-example-vr {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 100vh;
+            }
+
+            .bi {
+                vertical-align: -0.125em;
+                fill: currentColor;
+            }
+
+            .nav-scroller {
+                position: relative;
+                z-index: 2;
+                height: 2.75rem;
+                overflow-y: hidden;
+            }
+
+            .nav-scroller .nav {
+                display: flex;
+                flex-wrap: nowrap;
+                padding-bottom: 1rem;
+                margin-top: -1px;
+                overflow-x: auto;
+                text-align: center;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark shadow-sm">
+                <div class="container">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <strong>Active-Active Store</strong>
+                    </a>
+                    <div class="d-flex align-items-center">
+                        <span class="text-info me-3">{{ gcp_region }}</span>
+
+                        {% if 'cart_item' in session and
+                        session['cart_item']|length > 0 %}
+                        <ul class="navbar-nav me-auto my-2 my-lg-0">
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <span class="text-white">
+                                        {{ session['cart_item']|length }}
+                                        <i class="bi bi-cart"></i>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu p-2" style="width: 400px; left:-340px;">
+                                    {% for key, val in
+                                    session['cart_item'].items() %} {% set
+                                    quantity =
+                                    session['cart_item'][key]['quantity'] %} {%
+                                    set price =
+                                    session['cart_item'][key]['price'] %} {% set
+                                    item_price =
+                                    session['cart_item'][key]['total_price'] %}
+                                    <li
+                                        class="d-flex pt-3 border-bottom justify-content-between"
+                                    >
+                                        <img
+                                            src="/static/images/{{ session['cart_item'][key]['image'] }}"
+                                            width="40"
+                                            height="40"
+                                        />
+                                        <p class="pb-3 mb-0 small lh-sm me-5">
+                                            <strong
+                                                class="d-block text-gray-dark"
+                                                >[{{
+                                                session['cart_item'][key]['code']
+                                                }}]{{
+                                                session['cart_item'][key]['name']
+                                                }}</strong
+                                            >
+                                            {{ quantity }} x {{ price |
+                                            currencyFormat }} = {{ item_price |
+                                            currencyFormat }}
+                                        </p>
+                                        <p
+                                            class="pb-3 mb-0 small lh-sm ps-4 fs-4"
+                                        >
+                                            <a
+                                                class=""
+                                                href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}"
+                                            >
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </p>
+                                    </li>
+                                    {% endfor %}
+                                    <li
+                                        class="d-flex pt-3 border-bottom justify-content-end"
+                                    >
+                                        <p class="pb-3 mb-0 small lh-sm">
+                                            <strong
+                                                class="d-block text-gray-dark"
+                                                >Total: {{
+                                                session['sub_total_price'] |
+                                                currencyFormat }}</strong
+                                            >
+                                        </p>
+                                    </li>
+                                    <li class="d-flex pt-3 justify-content-end">
+                                        <a
+                                            class="btn btn-danger btn-sm me-3"
+                                            id="btnEmpty"
+                                            href="{{ url_for('.empty_cart') }}"
+                                            >Empty Cart</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% else %}
+                        <span class="text-white">
+                            <i class="bi bi-cart"></i>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h1 class="fw-light">Redis Active-Active Store</h1>
+                        <p class="lead text-muted">
+                            This sample storefront demonstrates how to use
+                            Active-Active to enable local read and write
+                            latencies wherever you are! Look at the region at
+                            the top of the screen to know where you are
+                            connecting from.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        {% for product in products %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img
+                                    class="mx-auto p-2"
+                                    width="225"
+                                    height="225"
+                                    src="/static/images/{{ product.image }}"
+                                />
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{ product.name }}
+                                    </h5>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center"
+                                    >
+                                        <div class="btn-group">
+                                            <form method="post" action="/add">
+                                                <div class="cart-action">
+                                                    <input
+                                                        type="hidden"
+                                                        name="code"
+                                                        value="{{ product.code }}"
+                                                    />
+                                                    <input
+                                                        style="
+                                                            vertical-align: middle;
+                                                        "
+                                                        type="number"
+                                                        class="text-center"
+                                                        name="quantity"
+                                                        value="1"
+                                                        size="2"
+                                                    />
+                                                    <input
+                                                        type="submit"
+                                                        value="Add to Cart"
+                                                        class="btn btn-primary"
+                                                    />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <small class="text-muted"
+                                            >{{ product.price | currencyFormat
+                                            }}</small
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
