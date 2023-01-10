@@ -1,6 +1,6 @@
 # GCP Retail Solution
 
-This repo contains utility code for the [Redis Enterprise Session Stability Store Solution Brief.](https://www.google.com) <br>
+This repo contains utility code for the [Redis Enterprise & Google Cloud maximize omnichannel conversion rates blog](https://cloud.google.com/blog/topics/retail/optimize-ecommerce-resiliency-with-redis-and-google-cloud). <br>
 They are for demonstration purposes and not meant for production.  <br><br>
 
 ![Retail solution - Redis on GCP](./img/Retail_Architecture_on_GCP.png)  
